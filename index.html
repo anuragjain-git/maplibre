@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Add a default marker</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+
+<script>
+  
+//user location
+
+    navigator.geolocation.getCurrentPosition(showPosition);
+    let latitude=0;
+    let longitude=0;
+    function showPosition(position) {
+        latitude =  position.coords.latitude; 
+        longitude = position.coords.longitude;
+        run();
+    }
+
+    //link map API
+
+    function run()
+    {
+
+        var map = new maplibregl.Map({
+            container: 'map',
+            style: 'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+            center: [longitude, latitude],
+            zoom: 13
+        });
+
+        // console.log(marker.getPopup()); // return the popup instance
+
+        //add marker to the map
+        var marker = new maplibregl.Marker()
+        .setLngLat([longitude, latitude])
+        .setPopup(new maplibregl.Popup().setHTML("<h1>Project Green Odisha!</h1>"))
+        .addTo(map);
+
+        // Set up an event listener on the map.
+        // map.on('click', function() {
+            
+        // alert('A click event has occurred');
+    // });
+
+    }
+    
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
